@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
       - name: petshop
-        image: sevenajay/petshop:latest
+        image: routparesh/petshop:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8090
         imagePullPolicy: Always
 ---
 apiVersion: v1
@@ -24,11 +24,12 @@ kind: Service
 metadata:
   name: petshop
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: petshop
   ports:
   - name: http
     protocol: TCP
     port: 80
-    targetPort: 8080
+    targetPort: 8090
+    nodePort: 30080  
